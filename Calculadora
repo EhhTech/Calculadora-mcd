@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculadora de MCD</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		table {
+			border-collapse: collapse;
+			margin-top: 20px;
+		}
+		th, td {
+			border: 1px solid black;
+			padding: 5px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>Calculadora de MCD</h1>
+	<form>
+		<label for="num1">Primer número:</label>
+		<input type="number" id="num1" name="num1" required><br>
+		<label for="num2">Segundo número:</label>
+		<input type="number" id="num2" name="num2" required><br>
+		<input type="button" value="Calcular MCD" onclick="calcularMCD()">
+	</form>
+	<div id="resultado"></div>
+	<table id="tabla" style="display:none">
+		<tr>
+			<th>a</th>
+			<th>b</th>
+			<th>r</th>
+		</tr>
+	</table>
+	<script>
+		function calcularMCD() {
+			var num1 = parseInt(document.getElementById("num1").value);
+			var num2 = parseInt(document.getElementById("num2").value);
+			var a = num1;
+			var b = num2;
+			var r = a % b;
+			var mcd = 0;
+			var fila = "";
+
+			while (r != 0) {
+				fila += "<tr><td>" + a + "</td><td>" + b + "</td><td>" + r + "</td></tr>";
+				a = b;
+				b = r;
+				r = a % b;
+			}
+			fila += "<tr><td>" + a + "</td><td>" + b + "</td><td>" + r + "</td></tr>";
+			mcd = b;
+
+			document.getElementById("resultado").innerHTML = "El MCD de " + num1 + " y " + num2 + " es: " + mcd + " &#8226;";
+			document.getElementById("tabla").innerHTML += fila;
+			document.getElementById("tabla").style.display = "table";
+		}
+	</script>
+</body>
+</html>
